@@ -1,21 +1,28 @@
-import { MemoryStorage } from './memory-storage'
+
 export default class Cart {
+
   constructor(storage) {
-    this.items = [];
-    this.total = 0;
+    this.storage = storage;
+  }
+
+  getItems () {
+    return this.storage.getItems()
   }
 
   addItem(cartObject) {
-    this.items.push(cartObject);
-    this.total = this._calculateTotal();
+    this.storage.add(cartObject)
   }
-  _calculateTotal() {
+
+  clear() {
+    this.storage.clear();
+  }
+
+  getTotal() {
     let total = 0;
-    this.items.forEach(item => {
+    this.storage.getItems().forEach(item => {
       total += item.price * item.quantity
     });
     return total;
   }
-}
 
-//cart.addItem({id: "1", quantity: 2, price: 1000});
+}
