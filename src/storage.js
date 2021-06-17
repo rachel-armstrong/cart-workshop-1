@@ -14,8 +14,8 @@ export default class Storage {
     throw new Error("Method 'clear()' must be implemented.");
   }
 
-  removeItem() {
-    throw new Error("Method 'removeItem()' must be implemented.");
-  }
+  // removeItem() {
+  //   throw new Error("Method 'removeItem()' must be implemented.");
+  // }
   
 }

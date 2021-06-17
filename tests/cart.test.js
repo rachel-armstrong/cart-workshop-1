@@ -1,6 +1,7 @@
 import makeServer from "../server";
 import Cart from '../src/cart';
 import MemoryStorage from "../src/memory-storage";
+import CartLocalStorage from "../src/local-storage";
 
 let server;
 
@@ -8,6 +9,8 @@ describe("Cart", ()=> {
 
   beforeEach(() => {
     server = makeServer();
+    let cart = new Cart(new CartLocalStorage());
+    cart.clear();
   });
 
   afterEach(() => {
@@ -56,5 +59,17 @@ describe("Cart", ()=> {
     cart.addItem({id: "1", quantity: 2, price: 1000});
     cart.clear();
     expect(cart.getItems()).toEqual([]);
+  });
+
+  test("Can add and get items from local storage", async () => {
+    let cart = new Cart(new CartLocalStorage());
+    cart.addItem({id: "1", quantity: 2, price: 1000});
+    expect(cart.getItems()).toEqual([{id: "1", quantity: 2, price: 1000}]);
+  });
+
+  test("Can add and get items from local storage", async () => {
+    let cart = new Cart(new CartLocalStorage());
+    cart.addItem({id: "1", quantity: 2, price: 1000});
+    expect(cart.getItems()).toEqual([{id: "1", quantity: 2, price: 1000}]);
   });
 });
