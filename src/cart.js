@@ -6,23 +6,24 @@ export default class Cart {
   }
 
   getItems () {
-    return this.storage.getItems()
+    return Promise.resolve(this.storage.getItems());
   }
 
   addItem(cartObject) {
-    this.storage.add(cartObject)
+    return Promise.resolve(this.storage.add(cartObject));
   }
 
   clear() {
-    this.storage.clear();
+    return Promise.resolve(this.storage.clear());
   }
 
-  getTotal() {
+  async getTotal() {
     let total = 0;
-    this.storage.getItems().forEach(item => {
+    let items = await this.storage.getItems();
+    items.forEach(item => {
       total += item.price * item.quantity
     });
-    return total;
+    return Promise.resolve(total);
   }
 
 }

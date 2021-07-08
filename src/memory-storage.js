@@ -7,12 +7,13 @@ export default class MemoryStorage extends Storage {
     this.items = [];
   }
   
-  add(cartObject) {
+  async add(cartObject) {
     this.items.push(cartObject);
+    return Promise.resolve();
   }
 
   getItems () {
-    return this.items;
+    return Promise.resolve(this.items);
   }
 
   clear() {
